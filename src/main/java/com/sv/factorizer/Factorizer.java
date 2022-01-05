@@ -21,7 +21,7 @@ public class Factorizer {
     
     public static void main(String[] args) {
         
-        // get user number
+        // GET USER NUMBER 
         Scanner scanner = new Scanner(System.in);
         int number = 0;
         boolean isLooping = true;
@@ -49,10 +49,10 @@ public class Factorizer {
         
         
         
-        // find factors
+        // FIND FACTORS
         List<Integer> factors = new ArrayList<>();
                 
-        for (int i = 1; i < number; i++) {
+        for (int i = 1; i <= number; i++) {
             if (number % i == 0) {
                 factors.add(i);
             }
@@ -60,26 +60,42 @@ public class Factorizer {
         
         
         
-        // find if perfect
+        // Is perfect?
         if (factors.stream().reduce(0, ((subtotal, element) -> subtotal + element)) == number) {
             isPerfect = true;
         }
             
         
-        // find if prime
+        
+        // Is prime?
+        // This could be done by checking if the size of the "factors" array = 2
+        // But this is brute force way of checking for prime.
         if (number % 2 != 0) {
+            isPrime = true;
             for (int i = 3; i < number / 2; i += 2) {
                 if (number % i == 0) {
+                    isPrime = false;
                     break;
                 }
             }
-            isPrime = true;
         }
         
-        System.out.printf("For the number %d:", number);
-        System.out.println(factors);
         
-        Integer.
+        
+        // Display the results
+        System.out.printf("%nFor the number %d:%n", number);
+        System.out.printf("- %d has %d factors: ", number, factors.size());
+        
+        for (int factor : factors) {
+            System.out.printf("%d ", factor);
+        }
+        
+        System.out.println();
+        
+        System.out.printf("- %d is " + (isPerfect ? "" : "NOT ") + "a perfect number.%n", number);
+        System.out.printf("- %d is " + (isPrime ? "" : "NOT ") + "a prime number.%n", number);
+        
+        
         
     }
 
